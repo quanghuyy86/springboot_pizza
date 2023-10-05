@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Contact</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' th:href='@{/css/style.css}'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script th:src='@{main.js}'></script>
+    <style>
+        /* Thiết lập một viền cho textarea */
+        textarea {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 8px;
+            width: 100%;
+            font-size: 14px;
+            line-height: 1.5;
+            resize: vertical; /* Cho phép thay đổi kích thước theo chiều dọc */
+        }
+
+        /* Thay đổi màu nền khi trỏ chuột vào textarea */
+        textarea:hover {
+            background-color: #f5f5f5;
+        }
+
+        /* Tùy chỉnh kích thước và vị trí của textarea */
+        #idmessage {
+            width: 98%;
+            height: 150px;
+            margin-top: 10px;
+        }
+
+        /* Thay đổi màu chữ trong textarea */
+        textarea {
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <!--  Header  -->
+    <div th:replace="~{fragments/fragments :: header}"></div>
+
+    <main>
+        <div class="banner_title">
+            <h1>Liên hệ với chúng tôi</h1>
+            <div class="breadcrum">
+                <a th:href="@{/layout/home_pizza.html}">Trang chủ</a> / Liên hệ với chúng tôi
+            </div>
+        </div>
+        <div class="register container">
+            <fieldset>
+                <legend>
+                    Contact us
+                </legend>
+<!--                <form accept-charset="utf-8" th:object="${contact}" th:action="@{/contactUs}" method="post">-->
+<!--                    <div class="form-group">-->
+<!--                        <label for="input_fullname">Họ tên</label>-->
+<!--                        <input th:field="*{name}" type="text" name="fullname" id="input_fullname"  field-name="họ tên" required="">-->
+<!--                        <p class="error" id="error_fullname"></p>-->
+<!--                    </div>-->
+<!--                    <div class="form-group">-->
+<!--                        <label for="input_email">Email</label>-->
+<!--                        <input th:field="*{email}" type="email" name="email" id="input_email" field-name="email" required="">-->
+<!--                        <p class="error" id="error_email"></p>-->
+<!--                    </div>-->
+<!--                    <div class="form-group">-->
+<!--                        <label for="phone">Số điện thoại</label>-->
+<!--                        <input th:field="*{sdt}" type="tel" name="phone" id="phone" required="">-->
+<!--                    </div>-->
+<!--                    <div class="form-group">-->
+<!--                        <label for="idmessage" >Chú thích</label>-->
+<!--                        <textarea th:field="*{message}"  name="message" id="idmessage" cols="70" rows="10" required=""></textarea>-->
+<!--                    </div>-->
+<!--                    <div class="form-group div-btn">-->
+<!--                        <button onclick="contact()" type="button" class="btn btn-register">Submit</button>-->
+<!--&lt;!&ndash;                        <button  type="submit" class="btn btn-register">Gửi liên hệ</button>&ndash;&gt;-->
+<!--                    </div>-->
+<!--                    <div class="other">-->
+<!--                        <a href="https://www.facebook.com/"><i class="fa-brands fa-facebook"></i></a> / <a href=""><i class="fa-brands fa-google"></i></a>-->
+<!--                    </div>-->
+<!--                </form>-->
+                <form accept-charset="utf-8" id="yourFormId">
+                    <div class="form-group">
+                        <label for="input_fullname">Họ tên</label>
+                        <input class=""  type="text" name="fullname" id="input_fullname"  field-name="họ tên">
+                        <p class="error" id="error_fullname"></p>
+                    </div>
+                    <div class="form-group">
+                        <label for="input_email">Email</label>
+                        <input  type="email" name="email" id="input_email" field-name="email" >
+                        <p class="error" id="error_email"></p>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Số điện thoại</label>
+                        <input  type="tel" name="phone" id="phone" >
+                    </div>
+                    <div class="form-group">
+                        <label for="idmessage" >Chú thích</label>
+                        <textarea  name="message" id="idmessage" cols="70" rows="10" ></textarea>
+                    </div>
+                    <div class="form-group div-btn">
+                        <button onclick="contact()" type="button" class="btn btn-register">Submit</button>
+                        <!--                        <button  type="submit" class="btn btn-register">Gửi liên hệ</button>-->
+                    </div>
+                    <div class="other">
+                        <a href="https://www.facebook.com/"><i class="fa-brands fa-facebook"></i></a> / <a href=""><i class="fa-brands fa-google"></i></a>
+                    </div>
+                </form>
+            </fieldset>
+        </div>
+    </main>
+    <!--  Footer  -->
+    <div th:replace="~{fragments/fragments :: footer}"></div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script th:src='@{/js/register.js}'></script>
+    <script>
+        function contact() {
+            //tạo javascript object
+            //json == javascript object
+            let data = {
+                name: $("#input_fullname").val(),
+                sdt: $("#phone").val(),
+                email: $("#input_email").val(),
+                message: $("#idmessage").val(),
+            };
+            let form = document.getElementById("yourFormId");
+
+            //Sử dụng hàm ajax của Jquery để gọi
+            jQuery.ajax({
+                url: 			"http://localhost:8080/contactUs", //--> action
+                type: 			"post",
+                contentType: 	"application/json",
+                data: 			JSON.stringify(data), //đổi kiểu dữ liệu của data thành string và có kiểu JSON
+
+                dataType: "json", //Kiểu dữ liệu trả về từ controller là json
+                success: function(jsonResult) {
+                    alert(jsonResult.StatusMessage);
+                    form.reset();
+                },
+                error: function(jqXhr, textStatus, errorMessage) {
+                    alert("Lỗi")
+                }
+            });
+        }
+    </script>
+</body>
+</html>
+</body>
+</html>
